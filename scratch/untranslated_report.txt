@@ -1,0 +1,13 @@
+1. <title>: New Seven Pharma | Veterinary Medicine, Cow Mat, Milking Machine & Pet Care | Dhule
+2. <div>: NEW SEVEN PHARMA
+3. <span id='productResultsCount'>: Showing all items
+4. <span id='calcResultDaily'>: 400 ml / day
+5. <span id='calcResultMonthly'>: 12.0 Litres (approx)
+6. <span id='calcResultMinerals'>: 6.0 Kg (approx)
+7. <div>: NEW SEVEN PHARMA
+8. <a>: Justdial
+9. <p>: M: 8888056560 / 9422750999
+10. <p>: Alt: 9422750888
+11. <p>: WhatsApp: 8530757226
+12. <p>: Landline: 02562-355033 / 283999
+13. <button id='mobileLangToggle'>: Language: English (मराठीत पहा)

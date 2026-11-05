@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" fill="none">
+  <rect width="360" height="260" rx="16" fill="#F8FAFC"/>
+  <!-- 5L / 10L Jerrycan Body -->
+  <path d="M125 90 L215 90 C225 90 235 100 235 110 L235 195 C235 205 225 210 215 210 L125 210 C115 210 105 205 105 195 L105 110 C105 100 115 90 125 90 Z" fill="#E2E8F0"/>
+  <!-- Handle -->
+  <path d="M140 90 L140 68 C140 64 200 64 200 68 L200 90" stroke="#CBD5E1" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Pour Spout & Cap -->
+  <rect x="120" y="70" width="22" height="20" rx="3" fill="#DC2626"/>
+  <!-- Product Label -->
+  <rect x="120" y="115" width="100" height="75" rx="6" fill="#FFFFFF"/>
+  <rect x="120" y="115" width="100" height="20" rx="4" fill="#0284C7"/>
+  <text x="170" y="130" font-family="system-ui, sans-serif" font-size="9" font-weight="800" fill="#FFFFFF" text-anchor="middle">LIQUID CALCIUM</text>
+  <text x="170" y="152" font-family="system-ui, sans-serif" font-size="8" font-weight="700" fill="#1E293B" text-anchor="middle">Ca + P + Vit D3 / B12</text>
+  <text x="170" y="168" font-family="system-ui, sans-serif" font-size="8" font-weight="600" fill="#64748B" text-anchor="middle">5 Litres / 10 Litres Can</text>
+  <rect x="22" y="20" width="115" height="28" rx="8" fill="#0284C7"/>
+  <text x="79" y="38" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">DAIRY NUTRITION</text>
+  <text x="180" y="240" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#475569" text-anchor="middle">High-Potency Veterinary Liquid Calcium</text>
+</svg>

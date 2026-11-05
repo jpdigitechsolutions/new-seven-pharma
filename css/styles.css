@@ -1,0 +1,753 @@
+/* ==========================================================================
+   NEW SEVEN PHARMA - ADVANCED PREMIUM DESIGN SYSTEM & MOTION ENGINE
+   ========================================================================== */
+
+/* Typography Imports */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Design Tokens */
+:root {
+  --color-primary: #059669;
+  --color-primary-dark: #064E3B;
+  --color-primary-light: #10B981;
+  --color-secondary: #0F766E;
+  --color-accent: #38BDF8;
+  --color-accent-amber: #F59E0B;
+  --color-bg: #F8FAFC;
+  --color-card-bg: #FFFFFF;
+  --color-heading: #0F172A;
+  --color-body: #475569;
+  --color-border: rgba(226, 232, 240, 0.85);
+
+  --font-en: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mr: 'Noto Sans Devanagari', 'Poppins', sans-serif;
+
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --shadow-subtle: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+  --shadow-hover: 0 20px 40px -8px rgba(5, 150, 105, 0.16), 0 8px 16px -4px rgba(15, 23, 42, 0.06);
+  --shadow-glow: 0 0 25px rgba(5, 150, 105, 0.35);
+}
+
+/* Base Setup */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 125px;
+  font-family: var(--font-en);
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--color-bg);
+  color: var(--color-heading);
+}
+
+section[id],
+div[id] {
+  scroll-margin-top: 125px;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 110px;
+  }
+  section[id],
+  div[id] {
+    scroll-margin-top: 110px;
+  }
+}
+
+html[lang="mr"] {
+  font-family: var(--font-mr);
+}
+
+body {
+  overflow-x: clip;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+  border: 2px solid #F1F5F9;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Scroll Progress Bar at Top */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #059669, #38BDF8, #F59E0B);
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   INITIAL PRELOADER / REVEAL SCREEN
+   ========================================================================== */
+#pagePreloader {
+  position: fixed;
+  inset: 0;
+  background: #064E3B;
+  background: radial-gradient(circle at center, #065F46 0%, #064E3B 70%, #022C22 100%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s var(--ease-smooth), visibility 0.6s var(--ease-smooth);
+}
+
+#pagePreloader.preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-emblem {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #059669, #0284C7);
+  box-shadow: 0 10px 30px rgba(5, 150, 105, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 38px;
+  font-weight: 900;
+  animation: emblemPop 1.2s var(--ease-spring) infinite alternate;
+}
+
+@keyframes emblemPop {
+  0% {
+    transform: scale(0.92) translateY(0);
+    box-shadow: 0 10px 25px rgba(5, 150, 105, 0.4);
+  }
+  100% {
+    transform: scale(1.06) translateY(-4px);
+    box-shadow: 0 20px 40px rgba(56, 189, 248, 0.5);
+  }
+}
+
+.preloader-bar {
+  width: 140px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  margin-top: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.preloader-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(90deg, #34D399, #38BDF8);
+  border-radius: 9999px;
+  animation: preloaderFill 1.2s ease-in-out infinite;
+}
+
+@keyframes preloaderFill {
+  0% { left: -40%; width: 40%; }
+  50% { width: 70%; }
+  100% { left: 100%; width: 40%; }
+}
+
+/* ==========================================================================
+   GLASSMORPHISM & SURFACE ELEVATIONS
+   ========================================================================== */
+#siteHeader {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+#siteHeader.header-scrolled {
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.glass-nav.nav-scrolled {
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
+  border-bottom-color: rgba(203, 213, 225, 0.8);
+}
+
+.desktop-nav-link {
+  position: relative;
+  transition: color 0.2s var(--ease-smooth);
+}
+
+.desktop-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #059669;
+  border-radius: 9999px;
+  transition: width 0.25s var(--ease-smooth);
+}
+
+.desktop-nav-link:hover::after,
+.desktop-nav-link.active::after {
+  width: 100%;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(241, 245, 249, 0.9);
+}
+
+.glass-dark {
+  background: rgba(6, 41, 32, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Gradient Texts */
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #0284C7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL ANIMATIONS (IntersectionObserver Engine)
+   ========================================================================== */
+.reveal-init {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+}
+
+.reveal-init.fade-up {
+  transform: translateY(32px);
+}
+
+.reveal-init.fade-down {
+  transform: translateY(-32px);
+}
+
+.reveal-init.slide-left {
+  transform: translateX(-40px);
+}
+
+.reveal-init.slide-right {
+  transform: translateX(40px);
+}
+
+.reveal-init.scale-in {
+  transform: scale(0.92);
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+/* Stagger delays */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* ==========================================================================
+   FLOATING & AMBIENT ANIMATIONS
+   ========================================================================== */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+.float-gentle {
+  animation: gentleFloat 5s ease-in-out infinite;
+}
+
+@keyframes gentleFloatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-0.5deg);
+  }
+}
+
+.float-reverse {
+  animation: gentleFloatReverse 6s ease-in-out infinite;
+}
+
+@keyframes softPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(5, 150, 105, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(5, 150, 105, 0.55), 0 0 10px rgba(56, 189, 248, 0.35);
+  }
+}
+
+.glow-aura {
+  animation: softPulseGlow 3s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   BUTTON & INTERACTIVE MICRO-STATES
+   ========================================================================== */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.3);
+}
+
+.btn-premium:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-premium::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+}
+
+.btn-premium:hover::after {
+  left: 150%;
+}
+
+/* Secondary Button Lift */
+.btn-lift {
+  transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth), background-color 0.2s ease;
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -3px rgba(15, 23, 42, 0.1);
+}
+
+.btn-lift:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Focus Visible */
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   CONTINUOUS PRODUCT SLIDER (Infinite Seamless Marquee)
+   ========================================================================== */
+.continuous-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.continuous-slider-track {
+  display: flex;
+  width: max-content;
+  animation: continuousSlide 48s linear infinite;
+  will-change: transform;
+}
+
+.continuous-slider-track:hover,
+.continuous-slider-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes continuousSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .continuous-slider-track {
+    animation-duration: 38s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .continuous-slider-track {
+    animation: none !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .continuous-slider-track > div {
+    scroll-snap-align: start;
+  }
+}
+
+
+/* ==========================================================================
+   TOP UTILITY TICKER MARQUEE
+   ========================================================================== */
+.top-marquee-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+}
+
+.top-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: topMarqueeSlide 45s linear infinite;
+  will-change: transform;
+}
+
+.top-marquee-track:hover,
+.top-marquee-track:focus-within,
+.top-marquee-track:active {
+  animation-play-state: paused;
+}
+
+@keyframes topMarqueeSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .top-marquee-track {
+    animation-duration: 32s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-marquee-track {
+    animation: none !important;
+    overflow-x: auto;
+  }
+}
+
+/* ==========================================================================
+   PRODUCT CARDS & ZOOM EFFECTS
+   ========================================================================== */
+.product-card {
+  transition: transform 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), border-color 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(5, 150, 105, 0.4);
+}
+
+.product-card .img-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card img {
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.product-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Category Filter Active Indicator */
+.cat-pill {
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.cat-pill.active {
+  background-color: var(--color-primary) !important;
+  color: #FFFFFF !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.35);
+  transform: scale(1.03);
+}
+
+.cat-pill.active i {
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   HAMBURGER ICON ANIMATION (Morphing to X)
+   ========================================================================== */
+.hamburger-box {
+  width: 20px;
+  height: 14px;
+  position: relative;
+  display: block;
+  pointer-events: none;
+}
+
+.hamburger-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background-color: currentColor;
+  border-radius: 9999px;
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-smooth), opacity 0.2s ease, top 0.3s var(--ease-smooth);
+}
+
+.hamburger-line:nth-child(1) { top: 0; }
+.hamburger-line:nth-child(2) { top: 6px; }
+.hamburger-line:nth-child(3) { top: 12px; }
+
+.hamburger-open .hamburger-line:nth-child(1) {
+  top: 6px;
+  transform: rotate(45deg);
+}
+
+.hamburger-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger-open .hamburger-line:nth-child(3) {
+  top: 6px;
+  transform: rotate(-45deg);
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION COMPONENT
+   ========================================================================== */
+#toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: translateY(20px) scale(0.9);
+  opacity: 0;
+  transition: transform 0.35s var(--ease-spring), opacity 0.35s ease;
+}
+
+.toast-pill.toast-visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.toast-pill.toast-success i {
+  color: #34D399;
+}
+
+.toast-pill.toast-info i {
+  color: #38BDF8;
+}
+
+/* ==========================================================================
+   BACK TO TOP FLOATING BUTTON WITH CIRCULAR PROGRESS
+   ========================================================================== */
+#backToTopBtn {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F172A;
+  z-index: 35;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.85);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+#backToTopBtn.btn-show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+#backToTopBtn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(5, 150, 105, 0.25);
+  color: var(--color-primary);
+}
+
+#backToTopBtn svg.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+#backToTopBtn circle {
+  fill: none;
+  stroke-width: 3.5;
+  stroke: var(--color-primary);
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+@media (max-width: 1023px) {
+  #backToTopBtn {
+    bottom: 88px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .float-gentle, .float-reverse, .glow-aura {
+    animation: none !important;
+  }
+}
+
+/* Print Utilities */
+@media print {
+  #pagePreloader, #scrollProgress, #backToTopBtn, #mobileStickyBar,
+  #cartDrawer, #cartDrawerBackdrop, .no-print, header, footer {
+    display: none !important;
+  }
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+}
+
+/* ==========================================================================
+   HIDE INJECTED NETLIFY BADGE / DRAWER / FEEDBACK WIDGET
+   ========================================================================== */
+#nl-badge,
+.nl-badge,
+#nl-card,
+.nl-card,
+.nl-badge-label,
+.nl-badge-brand,
+[class*="nl-badge"],
+[id*="nl-badge"],
+[class*="nl-card"],
+[id*="nl-card"],
+[aria-controls="nl-card"],
+[aria-label*="Powered by Netlify"],
+iframe#netlify-drawer,
+iframe[src*="netlify"],
+[data-netlify-drawer],
+div[class*="netlify-drawer"],
+#netlify-badge,
+.netlify-badge,
+netlify-badge,
+netlify-drawer,
+a[href*="www.netlify.com"],
+a[href*="app.netlify.com"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
+  left: -99999px !important;
+  top: -99999px !important;
+  clip: rect(0, 0, 0, 0) !important;
+  z-index: -99999 !important;
+}
